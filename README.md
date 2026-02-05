@@ -40,34 +40,3 @@ We use the two-pointer technique to efficiently compute trapped water in O(n) ti
 
 Dry Run Example
 Walls:
-
-csharp
-Copy code
-[0, 1, 0, 2, 0, 3, 0, 4]
-Step-by-step calculation
-Step	Left	Right	Height(L)	Height(R)	Left Max	Water Added	Total
-1	0	7	0	4	0	0	0
-2	1	7	1	4	1	0	0
-3	2	7	0	4	1	1	1
-4	3	7	2	4	2	0	1
-5	4	7	0	4	2	2	3
-6	5	7	3	4	3	0	3
-7	6	7	0	4	3	3	6
-
-Final trapped water = 6 units
-
-Running the Program
-To test the rain function, run the following command:
-
-./0_main.py
-The 0_main.py script imports the rain function and uses example inputs to demonstrate the functionality of the program.
-
-Example Output:
-6
-6
-Repository
-GitHub repository: alu-interview
-Directory: rain
-File: 0-rain.py
-6
-6
