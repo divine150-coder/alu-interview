@@ -1,30 +1,32 @@
 #!/usr/bin/python3
-"""Check readme for full description"""
+"""Rain water trapping algorithm"""
 
 
 def rain(walls):
-    """Rain function"""
-    water_retained = 0
-
-    if not isinstance(walls, list) or len(walls) < 3:
+    """Calculate trapped rainwater between walls
+    
+    Args:
+        walls: List of non-negative integers representing wall heights
+        
+    Returns:
+        Integer indicating total amount of rainwater retained
+    """
+    if not walls or len(walls) < 3:
         return 0
+    
+    left, right = 0, len(walls) - 1
+    left_max, right_max = walls[left], walls[right]
+    water = 0
+    
+    while left < right:
+        if walls[left] < walls[right]:
+            left += 1
+            left_max = max(left_max, walls[left])
+            water += left_max - walls[left]
+        else:
+            right -= 1
+            right_max = max(right_max, walls[right])
+            water += right_max - walls[right]
+    
+    return water
 
-    # The left and right max at each index
-    length = len(walls)
-    left, right = [[0]*length, [0]*length]
-
-    # Compute the values of the those maxes
-    left[0] = walls[0]
-    for i in range(1, length):
-        left[i] = max(left[i-1], walls[i])
-
-    right[length-1] = walls[length-1]
-    for i in range(length-2, -1, -1):
-        right[i] = max(right[i + 1], walls[i])
-
-    # Compute the water retained at each index
-    # using the min of the left and right max
-    for i in range(len(walls)):
-        water_retained += min(left[i], right[i]) - walls[i]
-
-    return water_retained
